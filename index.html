@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="js/jquery.xdomainajax.js"></script>
+    <script type="text/javascript" src="js/StackBlur.js"></script>
+
+    <script type="text/javascript" src="js/slot.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</head>
+<body>
+    <div class="container speakers" style='display:none'>
+        <div class="row">
+            <div class="span7 offset3">
+                <form class="form-horizontal">
+                    <legend>Mélangeur de conférenciers OpenCode</legend>
+
+                    <div class="help-block">
+                        Pour chaque présentateur, entrez un <b>identifiant Twitter</b>, une <b>addresse courriel Gravatar</b>, ou une <b>URL d'image</b> (<small>dont la taille ne dépasse pas 25kB -- c'est comme ça</small>).
+                    </div>
+
+                    <div class="progress progress-striped active" style='display:none'>
+                        <div class="bar" style="width: 100%;">
+                            Préchargement...
+                        </div>
+                    </div>
+
+
+                    <!-- repeated using jquery -->
+                    <div class="control-group single-speaker">
+                        <label class="control-label" for="inputEmail">Présentateur</label>
+                        <div class="controls">
+                            <input type="text" class='input-xlarge' placeholder="Twitter username, Gravatar email, img url"><br/>
+                            <label style='display:inline;cursor:pointer;'><input type="checkbox" tabindex="-1">
+                                Fixer l'ordre
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <a href="javascript:;" class='moar'>+ Moar</a>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <a href="javascript:;" class="btn btn-primary btn-large">Mélange!</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+</div>
+
+</div>
+
+<div id="results" style='display:none'></div>
+<div id='machine' style='display:none'></div>
+<div id="slots" style='display:none'></div>
+
+<div id="footer">(ↄ) OpenCode et al.</div>
+</body>
+</html>

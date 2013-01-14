@@ -1,0 +1,62 @@
+.speakers {
+    margin-top: 30px;
+}
+
+.form-horizontal > .help-block {
+    margin-bottom: 20px;
+}
+
+#results {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+
+    font-size: 24px;
+}
+
+#machine {
+    background: url(../img/machine-background-off.png);
+    background-repeat:no-repeat;
+    background-position:center;
+
+    margin: 0 auto;
+
+    height: 876px;
+    width: 522px;
+}
+
+#machine.on {
+    background: url(../img/machine-background-on.png);
+    background-repeat:no-repeat;
+    background-position:center;    
+}
+
+#slots {
+    width: 95px;
+    height: 180px;
+    margin: 0 auto;
+
+    position: relative;
+    top: -593px;
+}
+
+.slot {
+    background: url(../img/single-slot.jpg);
+    background-repeat:no-repeat;
+    width: 95px;
+    height: 180px;
+
+    float: left;
+}
+
+.slot canvas {
+    position: relative;
+    top: 25px;
+    left: 19px;
+}
+
+#footer {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}

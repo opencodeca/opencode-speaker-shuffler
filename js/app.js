@@ -57,53 +57,31 @@ function initSpeakerSelectionUI() {
 
     $('.progress .bar').css({'width': '25%'}).html("Préchargement…");
     $('.progress').addClass('progress-info').show();
-    preloadSpeakersFromOpenCodeDotCa(function(speakers) {
-        $('.progress .bar').css({'width': '100%'});
 
-        $.each(speakers, function(idx, speaker) {
-            $('.speakers input[type=text]:eq('+ idx +')').val(speaker);
-
-            // have an extra input field ready
-            if(idx+1 === $('.speakers input[type=text]').length)
-                $('a.moar').click();
-        });
-
-        // pure UI-appreciation delay...
-        setTimeout(function() {
-            $('.progress').hide();
-            $('.progress').removeClass('progress-info');
-        }, 1000);
+    $.ajax({
+        url: 'http://opencode.ca/api/editions/current',
+        type: 'GET',
+        dataType: 'json',
+        success: loadSpeakers
     });
 }
 
-function preloadSpeakersFromOpenCodeDotCa(callback) {
-    $.ajax({
-        url: 'http://opencode.ca/',
-        type: 'GET',
-        success: function(res) {
-            var speakers = [];
-            try {
-                speakers = res.responseText.split('sentations</h2>')[1].split('</ul>')[0].split('<li');
-            } catch (err) {
-                callback([]);
-                return;
-            }
+function loadSpeakers(data) {
+    $('.progress .bar').css({'width': '100%'});
 
-            var out = [];
-            var twitterAvatarPattern = /http:\/\/twitter.com\/api\/users\/profile_image\/([^"]+)/;
-            $.each(speakers, function(idx, html) {
-                var reRes = twitterAvatarPattern.exec(html);
-                if(reRes !== null && reRes.length === 2) {
-                    out.push('@'+ reRes[1]);
-                }
-            });
-            callback(out);
-        },
-        error: function() {
-            callback([]);
-            return;
-        }
+    $.each(data.talks, function(idx, talk) {
+        $('.speakers input[type=text]').eq(idx).val(talk.author_screenname);
+
+        // have an extra input field ready
+        if(idx+1 === $('.speakers input[type=text]').length)
+            $('a.moar').click();
     });
+
+    // pure UI-appreciation delay...
+    setTimeout(function() {
+        $('.progress').hide();
+        $('.progress').removeClass('progress-info');
+    }, 1000);
 }
 
 function orderSpeakers(speakers) {

@@ -196,7 +196,7 @@ function findImgUrl(twitterEmailUrl) {
     },{
         // twitter
         're': /^@?([A-Za-z0-9_]+)$/,
-        'process': function(user) { return "https://api.twitter.com/1/users/profile_image?screen_name="+ user.replace('@', '') +"&size=bigger"; }
+        'process': function(user) { return "http://twitter.com/api/users/profile_image/"+ user.replace('@', '') ; }
     }];
 
     var out = null;

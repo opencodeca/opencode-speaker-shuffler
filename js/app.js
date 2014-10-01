@@ -59,7 +59,7 @@ function initSpeakerSelectionUI() {
     $('.progress').addClass('progress-info').show();
 
     $.ajax({
-        url: 'http://opencode.ca/api/editions/current',
+        url: 'http://www.opencode.ca/api/editions/current',
         type: 'GET',
         dataType: 'json',
         success: loadSpeakers

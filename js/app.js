@@ -221,14 +221,12 @@ function preloadAvatars(speakers, callback) {
             type: 'GET',
             isImg: true,
             success: function(res) {
-                if(res.responseText.indexOf('error') !== -1 ||
-                   res.responseText.indexOf('<url>data:image') === -1) {
+                if(res.responseText.indexOf('error') !== -1) {
                     img.src = catholder;
-                    return;
+                } else {
+                    img.src = speaker.url;
                 }
-
-                var base64 = res.responseText.replace("<url>", "").replace("</url>", "");
-                img.src = base64;
+                return;
             },
             error: function() {
                 img.src = catholder;

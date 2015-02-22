@@ -31,6 +31,8 @@ var Slot = function(options) {
                 _this.startRotateDown();
             }
         }, _this.rollTime);
+        shufflerAudio.leverPull.play();
+        shufflerAudio.startAccelerating();
     }
 
     this.startRotateDown = function() {
@@ -60,6 +62,7 @@ var Slot = function(options) {
                 _this.draw();
             }
         }, _this.rollTime);
+        shufflerAudio.startDecelerating();
     }
 
     this.draw = function() {

@@ -279,11 +279,13 @@ function initSlotsUI(speakers, speakerOrder) {
                 if(++gSpunDownReels == speakers.length) {
                     // the end!
                     listSpeakers(speakers, speakerOrder);
+                    shufflerAudio.finishJingle.play();
 
                     setInterval(function() {
                         $('#machine').toggleClass('on');
                     }, 300);
                 }
+                shufflerAudio.cutAll();
             }
         });
 

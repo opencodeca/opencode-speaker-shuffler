@@ -62,7 +62,9 @@ var Slot = function(options) {
 
     this.draw = function() {
         this.drawAvatars();
-        stackBlurCanvasRGB(this.canvasId, 0, 0, this.canvasSize.x, this.canvasSize.y, this.speed/4);
+
+        // Removed for misbehaving with CORS-tolerant images
+        // stackBlurCanvasRGB(this.canvasId, 0, 0, this.canvasSize.x, this.canvasSize.y, this.speed/4);
 
         // centered red line
         this.canvasContext.beginPath();

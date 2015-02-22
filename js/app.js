@@ -296,6 +296,6 @@ function listSpeakers(speakers, speakerOrder) {
     for(var i = 0; i < speakerOrder.length; i++) {
         out.push('<li>'+ speakers[speakerOrder[i]]['twitter-email-url'] +'</li>');
     }
-    out = "<ul>"+ out.join('') +'</ul>';
+    out = "<ol>"+ out.join('') +'</ol>';
     $("#results").html(out);
 }

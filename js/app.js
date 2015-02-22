@@ -209,8 +209,7 @@ function preloadAvatars(speakers, callback) {
 
             gLoadedAvatars++;
             if(gLoadedAvatars == speakers.length) {
-                // pure UI-appreciation delay...
-                setTimeout(callback, 1000);
+                callback.call();
             }
         };
 

@@ -174,7 +174,7 @@ function findImgUrl(twitterEmailUrl) {
     },{
         // twitter
         're': /^@?([A-Za-z0-9_]+)$/,
-        'process': function(user) { return "http://twitter.com/api/users/profile_image/"+ user.replace('@', '') ; }
+        'process': function(user) { return "http://www.avatars.io/twitter/" + user ; }
     }];
 
     var out = null;

@@ -174,7 +174,7 @@ function findImgUrl(twitterEmailUrl) {
     },{
         // twitter
         're': /^@?([A-Za-z0-9_]+)$/,
-        'process': function(user) { return "http://twitter.com/api/users/profile_image/"+ user.replace('@', '') ; }
+        'process': function(user) { return "http://www.avatars.io/twitter/" + user ; }
     }];
 
     var out = null;
@@ -209,8 +209,7 @@ function preloadAvatars(speakers, callback) {
 
             gLoadedAvatars++;
             if(gLoadedAvatars == speakers.length) {
-                // pure UI-appreciation delay...
-                setTimeout(callback, 1000);
+                callback.call();
             }
         };
 
@@ -222,14 +221,12 @@ function preloadAvatars(speakers, callback) {
             type: 'GET',
             isImg: true,
             success: function(res) {
-                if(res.responseText.indexOf('error') !== -1 ||
-                   res.responseText.indexOf('<url>data:image') === -1) {
+                if(res.responseText.indexOf('error') !== -1) {
                     img.src = catholder;
-                    return;
+                } else {
+                    img.src = speaker.url;
                 }
-
-                var base64 = res.responseText.replace("<url>", "").replace("</url>", "");
-                img.src = base64;
+                return;
             },
             error: function() {
                 img.src = catholder;
@@ -282,11 +279,13 @@ function initSlotsUI(speakers, speakerOrder) {
                 if(++gSpunDownReels == speakers.length) {
                     // the end!
                     listSpeakers(speakers, speakerOrder);
+                    shufflerAudio.finishJingle.play();
 
                     setInterval(function() {
                         $('#machine').toggleClass('on');
                     }, 300);
                 }
+                shufflerAudio.cutAll();
             }
         });
 
@@ -299,6 +298,6 @@ function listSpeakers(speakers, speakerOrder) {
     for(var i = 0; i < speakerOrder.length; i++) {
         out.push('<li>'+ speakers[speakerOrder[i]]['twitter-email-url'] +'</li>');
     }
-    out = "<ul>"+ out.join('') +'</ul>';
+    out = "<ol>"+ out.join('') +'</ol>';
     $("#results").html(out);
 }

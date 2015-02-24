@@ -15,6 +15,8 @@ var Slot = function(options) {
 
         this.winnerIdx = options.winnerIdx;
         this.rotateDownCallback = options.rotateDownCallback || function() {};
+
+        this.rollTime = 5;
     };
 
     this.rotateUntilWinner = function() {
@@ -28,7 +30,9 @@ var Slot = function(options) {
                 clearInterval(rotateUpInterval);
                 _this.startRotateDown();
             }
-        }, 10);
+        }, _this.rollTime);
+        shufflerAudio.leverPull.play();
+        shufflerAudio.startAccelerating();
     }
 
     this.startRotateDown = function() {
@@ -41,10 +45,10 @@ var Slot = function(options) {
 
         var _this = this;
         var rotateDownInterval = setInterval(function() {
-            if(_this.speed < 3) {
+            if(_this.speed < 1) {
                 _this.deltaY += _this.speed;
 
-                if(Math.abs(_this.deltaY - finalDeltaY) < 4) {
+                if(Math.abs(_this.deltaY - finalDeltaY) < 2) {
                     clearInterval(rotateDownInterval);
                     _this.deltaY = finalDeltaY;
 
@@ -57,12 +61,15 @@ var Slot = function(options) {
                 _this.deltaY += _this.speed;
                 _this.draw();
             }
-        }, 10);
+        }, _this.rollTime);
+        shufflerAudio.startDecelerating();
     }
 
     this.draw = function() {
         this.drawAvatars();
-        stackBlurCanvasRGB(this.canvasId, 0, 0, this.canvasSize.x, this.canvasSize.y, this.speed/4);
+
+        // Removed for misbehaving with CORS-tolerant images
+        // stackBlurCanvasRGB(this.canvasId, 0, 0, this.canvasSize.x, this.canvasSize.y, this.speed/4);
 
         // centered red line
         this.canvasContext.beginPath();
